@@ -1,23 +1,40 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './ChatApp.css';
+import React, { useState, useEffect, useRef } from "react";
+import "./ChatApp.css";
+import ChatInput from "./ChatInput";
 
-const ChatApp = ({ payperviewId, token, userId, url }) => {
+// interface ChatProps {
+//   roomId: string;
+//   token: string;
+//   userId: number;
+//   wsUrl: string;
+//   wsImgParam: string;
+//   weUserNameParam: string;
+// }
+
+const ChatApp = ({
+  roomId,
+  token,
+  userId,
+  wsUrl,
+  wsImgParam,
+  weUserNameParam,
+}) => {
   const [ws, setWs] = useState(null);
   const [messages, setMessages] = useState([]);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [typing, setTyping] = useState(false);
   const messagesContainerRef = useRef(null);
 
   useEffect(() => {
-    const websocket = new WebSocket(url);
+    const websocket = new WebSocket(wsUrl);
     setWs(websocket);
 
     websocket.onopen = () => {
-      console.log('Connected to WebSocket');
+      console.log("Connected to WebSocket");
       websocket.send(
         JSON.stringify({
-          event: 'joinRoom',
-          data: { payperviewId, token },
+          event: "joinRoom",
+          data: { roomId, token },
         })
       );
     };
@@ -26,25 +43,26 @@ const ChatApp = ({ payperviewId, token, userId, url }) => {
       const messageData = JSON.parse(event.data);
       const { event: eventType, data } = messageData;
 
-      if (eventType === 'updateMessages') {
+      if (eventType === "updateMessages") {
         updateMessages(data.data, data.firstRender);
-      } else if (eventType === 'chat-onChangeReceive') {
-        console.log('User is typing:', data.userId);
+      } else if (eventType === "chat-onChangeReceive") {
+        console.log("User is typing:", data.userId);
       }
     };
 
     websocket.onclose = () => {
-      console.log('Disconnected from WebSocket');
+      console.log("Disconnected from WebSocket");
     };
 
     return () => {
       websocket.close();
     };
-  }, [payperviewId, token]);
+  }, [roomId, token]);
 
   useEffect(() => {
     if (messagesContainerRef.current) {
-      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+      messagesContainerRef.current.scrollTop =
+        messagesContainerRef.current.scrollHeight;
     }
   }, [messages]);
 
@@ -52,11 +70,11 @@ const ChatApp = ({ payperviewId, token, userId, url }) => {
     if (message.trim() && ws.readyState === WebSocket.OPEN) {
       ws.send(
         JSON.stringify({
-          event: 'send-message',
-          data: { payperviewId, message, token },
+          event: "send-message",
+          data: { roomId, message, token },
         })
       );
-      setMessage('');
+      setMessage("");
       setTyping(false);
     }
   };
@@ -67,8 +85,8 @@ const ChatApp = ({ payperviewId, token, userId, url }) => {
       setTyping(true);
       ws.send(
         JSON.stringify({
-          event: 'chat-onChange',
-          data: { payperviewId, onChange: true, userId },
+          event: "chat-onChange",
+          data: { roomId, onChange: true, userId },
         })
       );
     }
@@ -84,7 +102,7 @@ const ChatApp = ({ payperviewId, token, userId, url }) => {
 
   return (
     <div id="chat-container">
-      <h3>Chat Room</h3>
+      <h3>Chat Room inside node modules</h3>
       <div id="messages" ref={messagesContainerRef}>
         {messages.map((msg, index) => (
           <div key={index}>{msg.message}</div>
@@ -97,10 +115,13 @@ const ChatApp = ({ payperviewId, token, userId, url }) => {
         value={message}
         onChange={handleInputChange}
         onKeyPress={(e) => {
-          if (e.key === 'Enter') sendMessage();
+          if (e.key === "Enter") sendMessage();
         }}
       />
-      <button id="send-button" onClick={sendMessage}>Send</button>
+      <ChatInput/>
+      <button id="send-button" onClick={sendMessage}>
+        Send
+      </button>
     </div>
   );
 };
