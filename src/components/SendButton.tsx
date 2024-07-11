@@ -1,5 +1,4 @@
 import React from 'react';
-import './SendButton.css';  // Import CSS
 
 interface SendButtonProps {
   onClick: () => void;

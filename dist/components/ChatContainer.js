@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import MessageList from './MessageList';
-import MessageInput from './MessageInput';
-import { useWebSocket } from '../hooks/useWebSocket';
+import React, { useState } from "react";
+import MessageList from "./MessageList";
+import MessageInput from "./MessageInput";
+import { useWebSocket } from "../hooks/useWebSocket";
+import "../styles/index.css";
 var ChatContainer = function (_a) {
     var roomId = _a.roomId, token = _a.token, userId = _a.userId, wsUrl = _a.wsUrl, wsImgProp = _a.wsImgProp, wsUserNameProp = _a.wsUserNameProp;
     var _b = useWebSocket(roomId, token, userId, wsUrl), messages = _b.messages, sendMessage = _b.sendMessage, notifyTyping = _b.notifyTyping, showChatProgress = _b.showChatProgress;
