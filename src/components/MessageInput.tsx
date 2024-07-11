@@ -1,4 +1,5 @@
 import React, { useState, KeyboardEvent } from 'react';
+import SendButton from './SendButton';
 
 interface MessageInputProps {
   onSendMessage: (message: string) => void;
@@ -14,8 +15,14 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage, onTyping }) 
       setMessage('');
     }
   };
-
+  const handleSendClick = () => {
+    if (message.trim() !== '') {
+      onSendMessage(message);
+      setMessage('');
+    }
+  };
   return (
+    <div id="message-input-container">
     <input
       type="text"
       id="message-input"
@@ -27,6 +34,8 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage, onTyping }) 
       onKeyPress={handleKeyPress}
       placeholder="Type a message"
     />
+    <SendButton onClick={handleSendClick} />
+  </div>
   );
 };
 

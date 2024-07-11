@@ -1,20 +1,29 @@
-import React, { useState } from 'react';
-import MessageList from './MessageList';
-import MessageInput from './MessageInput';
-import { useWebSocket } from '../hooks/useWebSocket';
-import { Message } from '../types';
+import React, { useState } from "react";
+import MessageList from "./MessageList";
+import MessageInput from "./MessageInput";
+import { useWebSocket } from "../hooks/useWebSocket";
+import { Message } from "../types";
+import "../styles/index.css";
 
 interface ChatContainerProps {
   roomId: number;
   token: string;
   userId: number;
-  wsUrl:string;
-  wsImgProp:string;
-  wsUserNameProp:string
+  wsUrl: string;
+  wsImgProp: string;
+  wsUserNameProp: string;
 }
 
-const ChatContainer: React.FC<ChatContainerProps> = ({ roomId, token, userId, wsUrl, wsImgProp, wsUserNameProp }) => {
-  const { messages, sendMessage, notifyTyping, showChatProgress } = useWebSocket(roomId, token, userId, wsUrl);
+const ChatContainer: React.FC<ChatContainerProps> = ({
+  roomId,
+  token,
+  userId,
+  wsUrl,
+  wsImgProp,
+  wsUserNameProp,
+}) => {
+  const { messages, sendMessage, notifyTyping, showChatProgress } =
+    useWebSocket(roomId, token, userId, wsUrl);
   const [typing, setTyping] = useState(false);
 
   const handleSendMessage = (message: string) => {
