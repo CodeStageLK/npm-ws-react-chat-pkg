@@ -14,7 +14,7 @@ interface ChatContainerProps {
 }
 
 const ChatContainer: React.FC<ChatContainerProps> = ({ roomId, token, userId, wsUrl, wsImgProp, wsUserNameProp }) => {
-  const { messages, sendMessage, notifyTyping } = useWebSocket(roomId, token, userId, wsUrl);
+  const { messages, sendMessage, notifyTyping, showChatProgress } = useWebSocket(roomId, token, userId, wsUrl);
   const [typing, setTyping] = useState(false);
 
   const handleSendMessage = (message: string) => {
@@ -24,7 +24,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ roomId, token, userId, ws
   const handleTyping = () => {
     if (!typing) {
       setTyping(true);
-      notifyTyping();
+      notifyTyping(true);
     }
   };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Message } from '../types';
 
 interface MessageListProps {
-  messages: Message[];
+  messages: any[];
 }
 
 const MessageList: React.FC<MessageListProps> = ({ messages }) => {

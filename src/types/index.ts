@@ -1,4 +1,5 @@
 export interface Message {
-    message: string;
-  }
-  
+  message: string;
+  user_id: string;
+  user: any;
+}

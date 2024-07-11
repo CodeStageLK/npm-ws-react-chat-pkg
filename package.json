@@ -1,5 +1,5 @@
 {
-  "name": "chat-library",
+  "name": "@types/ws-react-chat",
   "version": "1.0.0",
   "description": "A React TypeScript chat library",
   "main": "dist/index.js",
@@ -7,7 +7,7 @@
     "build": "tsc"
   },
   "keywords": ["chat", "react", "typescript"],
-  "author": "Your Name",
+  "author": "CodeStageSL",
   "license": "MIT",
   "peerDependencies": {
     "react": "^17.0.0",
