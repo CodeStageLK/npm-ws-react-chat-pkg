@@ -1,22 +1,21 @@
 {
-  "name": "wss-react-chat",
+  "name": "chat-library",
   "version": "1.0.0",
-  "description": "Chat server with react",
-  "main": "src/ChatApp.js",
+  "description": "A React TypeScript chat library",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "tsc"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": ["chat", "react", "typescript"],
+  "author": "Your Name",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
+  },
   "devDependencies": {
-    "@babel/core": "^7.24.7",
-    "@babel/preset-env": "^7.24.7",
-    "@babel/preset-react": "^7.24.7",
-    "babel-loader": "^9.1.3",
-    "css-loader": "^7.1.2",
-    "style-loader": "^4.0.0",
-    "webpack": "^5.92.1",
-    "webpack-cli": "^5.1.4"
+    "typescript": "^4.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0"
   }
 }
